@@ -15,7 +15,6 @@ public class Book {
     private Long bookId;
 
     private String title;
-    private String author;
     private String genre;
 
     @ManyToMany
