@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:fragment="baseHeader(title)">
+    <meta charset="UTF-8">
+    <title th:replace="${title}">Dit is een algemene titel</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" href="/css/library.css"/>
+</head>
+<body>
+<div th:fragment="navbar">
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/authors/all}">Auteurs</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/books/all}">Boeken</a>
+        </li>
+    </ul>
+</div>
+<h1>Overzicht van de boeken</h1>
+<table>
+    <tr>
+        <th>titel</th>
+        <th>auteur</th>
+        <th>delete</th>
+        <th>edit</th>
+        <th>copies</th>
+    </tr>
+    <tr th:each="book : ${allBooks}">
+        <td><a th:href="@{/books/details/{title}(title=${book.title})}"  th:text="${book.title}">Titel</a></td>
+        <td th:text="${book.authorsDisplayString}"></td>
+        <td><a th:href="@{/books/delete/{bookId}(bookId=${book.bookId})}">Delete</a></td>
+        <td><a th:href="@{/books/edit/{bookId}(bookId=${book.bookId})}">Edit</a></td>
+        <td>
+            <span th:text="${book.numberOfAvailableCopies}"></span>
+            <a th:href="@{/copy/new/{bookId}(bookId=${book.bookId})}">Buy</a>
+        </td>
+    </tr>
+</table>
+
+<a th:href="@{/books/new}">Maak nieuw boek</a>
+
+<div th:fragment="footer">
+    <footer>Copyright Eelke Mulder &copy;2022</footer>
+</div>
+
+<div th:fragment="bottomScripts">
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="fragments/general :: baseHeader(~{:: title})">
+  <title>Book Details</title>
+</head>
+<body>
+<h1>Details van boek: <span th:text="${book.title}"></span></h1>
+
+<table>
+  <tr>
+    <td>Titel</td>
+    <td th:text="${book.title}"></td>
+  </tr>
+  <tr th:each="author : ${book.authors}">
+    <td>Auteur</td>
+    <td th:text="${author.displayName}"></td>
+  </tr>
+  <tr>
+    <td>Genre</td>
+    <td th:text="${book.genre}"></td>
+  </tr>
+  <tr>
+    <td>Aantal beschikbaar</td>
+    <td th:text="${book.numberOfAvailableCopies}"></td>
+  </tr>
+</table>
+
+
+
+<table>
+  <tr>
+    <th>copyId</th>
+    <th>Leen status</th>
+  </tr>
+  <tr th:each="copy : ${book.copies}">
+    <td th:text="${copy.copyId}"></td>
+    <td th:if="${copy.available}">
+      <a th:href="@{/copy/borrow/{copyId}(copyId=${copy.copyId})}">Leen</a>
+    </td>
+    <td th:unless="${copy.available}">
+      <a th:href="@{/copy/return/{copyId}(copyId=${copy.copyId})}">Breng terug</a>
+    </td>
+  </tr>
+</table>
+
+<a th:href="@{/books/all}">Terug naar overzicht</a>
+
+</body>
+</html>

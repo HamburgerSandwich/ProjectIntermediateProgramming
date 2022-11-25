@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Maak een nieuwe film</title>
+  <link rel="stylesheet" type="text/css" href="/css/library.css"/>
+</head>
+<body>
+
+<h1>Maak een nieuwe film</h1>
+
+<form th:action="@{/films/new}" method="post" th:object="${film}">
+  <input type="hidden" th:field="*{filmId}">
+  <table>
+    <tr>
+      <td>Titel</td>
+      <td><input type="text" th:field="*{title}"></td>
+    </tr>
+    <tr>
+      <td>Release Year</td>
+      <td><input type="text" th:field="*{releaseYear}"></td>
+    </tr>
+    <tr>
+      <td>Rating</td>
+      <td><input type="text" th:field="*{rating}"></td>
+    </tr>
+  </table>
+  <input type="submit" value="Sla film op">
+</form>
+
+</body>
+</html>
